@@ -1,10 +1,12 @@
 module.exports = {
   devServer: {
-    '/api': {
-      target: 'http://localhost'
-    },
-    '/storage': {
-      target: 'http://localhost'
+    proxy: {
+      '/api': {
+        target: 'http://localhost'
+      },
+      '/storage': {
+        target: 'http://localhost'
+      }
     }
   },
   assetsDir: 'assets',
