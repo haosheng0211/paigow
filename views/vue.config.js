@@ -9,7 +9,12 @@ module.exports = {
       }
     }
   },
+
   assetsDir: 'assets',
   outputDir: '../public',
-  indexPath: '../resources/views/app.blade.php'
+  indexPath: '../resources/views/app.blade.php',
+
+  transpileDependencies: [
+    'vuetify'
+  ]
 }
