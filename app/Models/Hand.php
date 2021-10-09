@@ -32,4 +32,12 @@ class Hand extends Model
     protected $casts = [
         'cards' => 'array'
     ];
+
+    protected static function booted()
+    {
+        parent::booted();
+        static::addGlobalScope('orderByAsc', function (Builder $builder) {
+            return $builder->orderBy('order');
+        });
+    }
 }
