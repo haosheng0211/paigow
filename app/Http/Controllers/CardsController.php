@@ -2,33 +2,25 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CardsRequest as Request;
 use App\Models\Card;
+use Illuminate\Http\JsonResponse;
 
 class CardsController extends Controller
 {
-    public function index()
+    /**
+     * @return JsonResponse
+     */
+    public function options(): JsonResponse
     {
-        //
-    }
+        $cards = Card::all();
 
-    public function store(Request $request)
-    {
-        //
-    }
+        $cards = $cards->map(function (Card $card) {
+            return [
+                'text'  => $card->label,
+                'value' => $card->id
+            ];
+        })->toArray();
 
-    public function show(Card $card)
-    {
-        //
-    }
-
-    public function update(Request $request, Card $card)
-    {
-        //
-    }
-
-    public function destroy(Card $card)
-    {
-        //
+        return $this->response($cards);
     }
 }
