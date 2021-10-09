@@ -18,7 +18,6 @@ class CreateCardsTable extends Migration
             $table->string('label');
             $table->string('image');
             $table->integer('cards_count');
-            $table->timestamps();
         });
     }
 

@@ -18,7 +18,6 @@ class CreateHandsTable extends Migration
             $table->unsignedBigInteger('patterns_id');
             $table->json('cards');
             $table->integer('order');
-            $table->timestamps();
         });
     }
 

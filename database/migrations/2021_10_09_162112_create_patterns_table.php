@@ -16,7 +16,6 @@ class CreatePatternsTable extends Migration
         Schema::create('patterns', function (Blueprint $table) {
             $table->id();
             $table->string('label');
-            $table->timestamps();
         });
     }
 
