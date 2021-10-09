@@ -16,7 +16,7 @@ class CreateComposesTable extends Migration
         Schema::create('composes', function (Blueprint $table) {
             $table->id();
             $table->string('label')->nullable();
-            $table->json('cards');
+            $table->string('cards');
             $table->boolean('pairs')->default(0);
             $table->integer('order');
             $table->decimal('score_south', 8, 3);

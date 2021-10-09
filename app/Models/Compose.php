@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @property int         $id
  * @property string|null $label
- * @property string      $cards
+ * @property array       $cards
  * @property int         $pairs
  * @property int         $order
  * @property string      $score_south
@@ -34,4 +34,8 @@ class Compose extends Model
     use HasFactory;
 
     public $timestamps = false;
+
+    public $casts = [
+        'cards' => 'array'
+    ];
 }
