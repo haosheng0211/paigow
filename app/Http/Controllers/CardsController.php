@@ -16,8 +16,10 @@ class CardsController extends Controller
 
         $cards = $cards->map(function (Card $card) {
             return [
-                'text'  => $card->label,
-                'value' => $card->id
+                'text'        => $card->label,
+                'value'       => $card->id,
+                'image'       => $card->image,
+                'cards_count' => $card->cards_count
             ];
         })->toArray();
 
