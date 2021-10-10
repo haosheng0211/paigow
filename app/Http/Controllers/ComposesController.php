@@ -24,8 +24,8 @@ class ComposesController extends Controller
             $composes->orderBy($order[0], $order[1]);
         }
 
-        if (!is_null($card = $request->get('card'))) {
-            $composes->whereJsonContains('cards', (int) $card);
+        if (!is_null($cards = $request->get('cards'))) {
+            $composes->whereJsonContains('cards', (int) $cards);
         }
 
         return $this->response(new PaginateCollection($composes->pagination(), ComposesResource::class));
