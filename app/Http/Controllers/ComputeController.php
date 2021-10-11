@@ -6,10 +6,16 @@ use App\Http\Requests\ComputeRequest as Request;
 use App\Models\Patterns;
 use App\Models\Record;
 use App\Services\ComputeService;
+use Illuminate\Http\JsonResponse;
 
 class ComputeController extends Controller
 {
-    public function __invoke(Request $request)
+    /**
+     * @param  Request  $request
+     *
+     * @return JsonResponse
+     */
+    public function __invoke(Request $request): JsonResponse
     {
         $record = new Record();
         $record->cards = $request->get('cards');

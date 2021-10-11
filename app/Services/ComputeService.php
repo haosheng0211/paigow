@@ -62,9 +62,6 @@ class ComputeService
     {
         $this->patterns['hands'] = array_map(function ($hand) {
             $hands = Compose::analyze($hand['cards'], $this->location);
-            if (count($hands) !== 2) {
-                dd($hand, $hands);
-            }
             [$after, $front] = $hands;
             return [
                 'order'       => $hand['order'],

@@ -24,6 +24,10 @@ class ComposesRequest extends FormRequest
                     'score_south' => ['required', 'numeric'],
                     'score_north' => ['required', 'numeric'],
                 ];
+            case 'import':
+                return [
+                    'file' => ['required', 'file']
+                ];
             default:
                 return [];
         }

@@ -22,8 +22,8 @@ class ComposesResource extends JsonResource
             'cards'       => $this->cards,
             'pairs'       => $this->pairs,
             'order'       => $this->order,
-            'score_south' => $this->score_south,
-            'score_north' => $this->score_north,
+            'score_south' => number_format($this->score_south,3),
+            'score_north' => number_format($this->score_north,3),
         ];
     }
 }
