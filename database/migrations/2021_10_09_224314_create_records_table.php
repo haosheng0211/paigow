@@ -14,9 +14,11 @@ class CreateRecordsTable extends Migration
     public function up()
     {
         Schema::create('records', function (Blueprint $table) {
-            $table->id();
-            $table->longText('params');
-            $table->longText('result');
+            $table->id()->startingValue(100001);
+            $table->longText('cards');
+            $table->string('location');
+            $table->longText('response');
+            $table->string('ip_address');
             $table->timestamps();
         });
     }
