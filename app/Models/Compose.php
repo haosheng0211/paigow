@@ -36,6 +36,13 @@ class Compose extends Model
 
     public $timestamps = false;
 
+    protected $fillable = [
+        'id',
+        'order',
+        'score_north',
+        'score_south'
+    ];
+
     public $casts = [
         'cards'       => 'array',
         'score_north' => 'float',
