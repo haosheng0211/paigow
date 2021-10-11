@@ -42,10 +42,11 @@ class Handler extends ExceptionHandler
     {
         if ($e instanceof ValidationException) {
             return response()->json([
-                'errors' => $e->validator->errors()
+                'errors'  => $e->validator->errors(),
+                'message' => '參數錯誤'
             ])->setStatusCode(422);
         }
-        
+
         return parent::render($request, $e);
     }
 }
