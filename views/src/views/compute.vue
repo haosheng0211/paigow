@@ -52,18 +52,7 @@
             disable-sort
             :headers="headers"
             :items="items"
-          >
-            <template v-slot:item.order="{ item }">
-              <v-chip
-                v-for="order in item.order"
-                :key="order"
-                color="primary"
-                style="margin-left: 8px;"
-              >
-                <b>{{ order }}</b>
-              </v-chip>
-            </template>
-          </v-data-table>
+          />
         </v-col>
         <v-col cols="6">
           <v-row>
