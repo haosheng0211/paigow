@@ -3,25 +3,35 @@
     <template v-slot:actions>
       <v-btn
         color="primary"
+        dark
         @click="$refs.table.search()"
       >
         搜尋
       </v-btn>
+      <v-btn
+        color="success"
+        dark
+        @click="onExportData"
+      >
+        導出
+      </v-btn>
+      <imports-dialog
+        api-url="/api/composes/import"
+        @success="$refs.table.search()"
+      />
     </template>
     <template v-slot:filters>
-      <v-select
+      <pairs-select
         v-model="filters.pairs"
-        :items="options.pairs"
         label="選擇類型"
       />
-      <v-select
+      <order-select
         v-model="filters.order"
-        :items="options.order"
         label="顯示排序"
       />
-      <v-select
-        v-model="filters.card"
-        :items="options.card"
+      <cards-select
+        v-model="filters.cards"
+        :default="{ text:'全部',value:null }"
         label="選擇卡牌"
       />
     </template>
@@ -34,7 +44,7 @@
       api-url="/api/composes"
       :filters="filters"
       :headers="headers"
-      @click:row="onClickRow"
+      @click:row="(item)=>$refs.dialog.open(item)"
     />
   </panel>
 </template>
@@ -43,9 +53,13 @@
 import Panel from '@/components/panel'
 import DataTable from '@/components/table/data-table'
 import ComposesEditDialog from '@/components/dialog/composes-edit-dialog'
+import PairsSelect from '@/components/select/pairs-select'
+import OrderSelect from '@/components/select/order-select'
+import CardsSelect from '@/components/select/cards-select'
+import ImportsDialog from '@/components/dialog/imports-dialog'
 
 export default {
-  components: { ComposesEditDialog, DataTable, Panel },
+  components: { ImportsDialog, CardsSelect, OrderSelect, PairsSelect, ComposesEditDialog, DataTable, Panel },
   data () {
     return {
       headers: [
@@ -58,40 +72,15 @@ export default {
       filters: {
         pairs: 1,
         order: 'score_south,desc',
-        card: null
-      },
-      options: {
-        pairs: [
-          { text: '對子', value: 1 },
-          { text: '其他', value: 0 }
-        ],
-        order: [
-          { text: '南部比分高到低', value: 'score_south,desc' },
-          { text: '南部比分低到高', value: 'score_south,asc' },
-          { text: '北部比分高到低', value: 'score_north,desc' },
-          { text: '北部比分低到高', value: 'score_north,asc' },
-          { text: '排序權重高到低', value: 'order,asc' },
-          { text: '排序權重低到高', value: 'order,desc' }
-        ],
-        card: [
-          { text: '全部', value: null }
-        ]
+        cards: null
       }
     }
   },
-  created () {
-    this.loadCards()
-  },
   methods: {
-    onClickRow (item) {
-      this.$refs.dialog.open(item)
-    },
-    async loadCards () {
+    async onExportData () {
       try {
-        const cards = await this.$axios.get('/api/card/options')
-        cards.forEach(item => {
-          this.options.card.push(item)
-        })
+        const { url } = await this.$axios.post('/api/composes/export')
+        window.open(url)
       } catch (error) {
         this.$message.error(error.response.data.message)
       }

@@ -8,6 +8,7 @@
 
 <script>
 import ValueMixin from '@/utils/mixins/value-mixin'
+
 export default {
   name: 'PairsSelect',
   mixins: [ValueMixin],

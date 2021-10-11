@@ -55,7 +55,9 @@ export default {
     return {
       drawer: null,
       items: [
-        { icon: 'mdi-cards', text: '牌組', path: '/composes' }
+        { icon: 'mdi-apple-safari', text: '應用', path: '/compute' },
+        { icon: 'mdi-cards', text: '牌組', path: '/composes' },
+        { icon: 'mdi-file-document', text: '紀錄', path: '/records' }
       ]
     }
   }
