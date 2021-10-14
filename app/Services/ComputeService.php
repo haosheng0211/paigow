@@ -65,10 +65,10 @@ class ComputeService
             [$after, $front] = $hands;
             return [
                 'order'       => $hand['order'],
-                'cards'       => $hand['cards'],
-                'front_cards' => $front['cards'],
+                //                'cards'       => $hand['cards'],
+                //                'front_cards' => $front['cards'],
                 'front_score' => $front["score_{$this->location}"],
-                'after_cards' => $after['cards'],
+                //                'after_cards' => $after['cards'],
                 'after_score' => $after["score_{$this->location}"],
             ];
         }, $this->patterns['hands']);
@@ -110,15 +110,15 @@ class ComputeService
             return '正順官';
         }
 
-        if ($a['front_score'] == 0 && $b['front_score'] == 0 && $c['front_score'] == 0 && $d['front_score'] == 0) {
+        if (($a['front_score'] == 0 && $b['front_score'] == 0 && $c['front_score'] == 0 && $d['front_score'] == 0) && ($a['after_score'] > $b['after_score'] && $b['after_score'] > $c['after_score'] && $c['after_score'] > $d['after_score'])) {
             return '正順官';
         }
 
-        if ($a['front_score'] > $b['front_score'] && $b['front_score'] == 0 && $c['front_score'] == 0 && $d['front_score'] == 0) {
+        if (($a['front_score'] > $b['front_score'] && $b['front_score'] == 0 && $c['front_score'] == 0 && $d['front_score'] == 0) && ($b['after_score'] > $c['after_score'] && $c['after_score'] > $d['after_score'])) {
             return '正順官';
         }
 
-        if ($a['front_score'] > $b['front_score'] && $b['front_score'] > $c['front_score'] && $c['front_score'] == 0 && $d['front_score'] == 0) {
+        if (($a['front_score'] > $b['front_score'] && $b['front_score'] > $c['front_score'] && $c['front_score'] == 0 && $d['front_score'] == 0) && ($c['after_score'] > $d['after_score'])) {
             return '正順官';
         }
 
@@ -158,7 +158,7 @@ class ComputeService
          * name: 1,2一樣大
          * rule: ($a['front_score']>$b['front_score']&&$a['front_score']>$c['front_score']&&$a['front_score']>$d['front_score'])&&($b['front_score']>$c['front_score']&&$b['front_score']>$d['front_score'])&&($c['front_score']<$d['front_score'])
          */
-        if (($a['front_score'] > $b['front_score'] && $a['front_score'] > $c['front_score'] && $a['front_score'] > $d['front_score']) && ($b['front_score'] > $c['front_score'] && $b['front_score'] > $d['front_score']) && ($c['front_score'] < $d['front_score'])) {
+        if (($a['front_score'] > $b['front_score'] && $a['front_score'] > $c['front_score'] && $a['front_score'] > $d['front_score']) && ($b['front_score'] > $c['front_score'] && $b['front_score'] > $d['front_score']) && ($c['front_score'] <= $d['front_score'])) {
             return '1,2一樣大';
         }
 
