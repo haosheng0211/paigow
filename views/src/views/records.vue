@@ -1,5 +1,13 @@
 <template>
   <panel>
+    <template v-slot:actions>
+      <v-btn
+        color="error"
+        @click="onDestroy"
+      >
+        清空
+      </v-btn>
+    </template>
     <records-dialog ref="dialog" />
     <data-table
       api-url="/api/records"
@@ -28,6 +36,16 @@ export default {
         { text: '操作位置', value: 'ip_address', align: 'right' },
         { text: '操作時間', value: 'created_at', align: 'right' }
       ]
+    }
+  },
+  methods: {
+    async  onDestroy () {
+      try {
+        const { message } = await this.$axios.delete('/api/records')
+        this.$message.success(message)
+      } catch (error) {
+        this.$message.error(error.response.data.message)
+      }
     }
   }
 }
