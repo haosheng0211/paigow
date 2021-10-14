@@ -81,7 +81,7 @@ class ComputeService
     {
         $this->patterns['hands'] = array_values(collect($this->patterns['hands'])->sortByDesc('front_score')->sortByDesc('after_score')->toArray());
         $this->patterns['order'] = array_map(function ($i) {
-            return $i + 1;
+            return 4 - $i;
         }, array_keys(collect($this->patterns['hands'])->sortBy('order', SORT_ASC)->toArray()));
     }
 
